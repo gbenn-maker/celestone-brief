@@ -474,7 +474,8 @@
         state.answers[f]=v;
         if(f==='measurement_mode')toggleSurfaceFields();
         if(f==='style_family')state.recommendations=recommend();
-        if(f==='timeframe'||f==='project_type'||f==='style_family'||f==='measurement_mode')queueSync();
+        if(f==='reassurance_requested')renderReassurance();
+        if(f==='timeframe'||f==='project_type'||f==='style_family'||f==='measurement_mode'||f==='reassurance_requested')queueSync();
         renderChoices();
       });
     });
@@ -598,13 +599,15 @@
     if(i>=0)arr.splice(i,1);else arr.push(name);
     state.answers.selected_models=arr;
     state.answers.selected_model=arr[0]||'';
+    var err=document.querySelector('[data-error="7"]'); if(err&&arr.length)err.classList.remove('show');
     renderRecommendations();
     renderCollection();
     queueSync();
   }
 
   function renderRecommendations(){
-    var list=state.recommendations&&state.recommendations.length?state.recommendations:recommend();
+    var raw=state.recommendations&&state.recommendations.length?state.recommendations:recommend();
+    var list=raw.map(function(r){return Object.assign({},MODEL_MAP[r.name]||r,r);}).filter(function(r){return r&&r.name;});
     state.recommendations=list;
     var root=el('recommendations'); root.innerHTML='';
     list.forEach(function(m){root.appendChild(modelCard(m));});
