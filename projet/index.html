@@ -572,7 +572,15 @@
     if(step===5)ok=!!String(state.answers.city||'').trim()&&!!state.answers.timeframe;
     if(step===7)ok=Array.isArray(state.answers.selected_models)&&state.answers.selected_models.length>0;
     if(step===8)ok=state.answers.reassurance_requested==='yes'||state.answers.reassurance_requested==='no';
-    if(step===9)ok=!!String(state.contact.full_name||'').trim()&&String(state.contact.phone||'').replace(/\D/g,'').length>=8;
+    if(step===9){
+      // Safari/iOS autofill can visually populate fields without reliably firing input/change.
+      // Read the DOM at submit time so what the visitor sees is what we validate and save.
+      state.contact.full_name=String(el('fullName').value||'').trim();
+      state.contact.phone=String(el('phone').value||'').trim();
+      state.contact.email=String(el('email').value||'').trim();
+      ok=!!state.contact.full_name&&state.contact.phone.replace(/\D/g,'').length>=8;
+      if(ok)queueSync();
+    }
     var box=document.querySelector('[data-error="'+step+'"]');
     if(box)box.classList.toggle('show',!ok);
     return ok;
