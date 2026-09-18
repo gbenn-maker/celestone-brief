@@ -430,7 +430,15 @@
       var persisted = null;
       try{ persisted=JSON.parse(localStorage.getItem(STATE_KEY)||'null'); }catch(e){}
       if(persisted)state=Object.assign(state,persisted,{answers:Object.assign(state.answers,persisted.answers||{}),contact:Object.assign(state.contact,persisted.contact||{})});
-      var token = qs('d') || state.token || localStorage.getItem(TOKEN_KEY);
+      var explicitToken=qs('d');
+      var resume=qs('resume')==='1';
+      var token=explicitToken||(resume?(state.token||localStorage.getItem(TOKEN_KEY)):null);
+      if(!explicitToken&&!resume){
+        state.token=null; state.code=null; state.step=1; state.photo_count=0; state.recommendations=[];
+        state.answers={project_type:'',measurement_mode:'',surface_m2:null,wall_length:null,wall_height:null,style_family:'',city:'',timeframe:'',selected_model:'',selected_models:[],collection_opened:false,reassurance_requested:''};
+        state.contact={full_name:'',phone:'',email:''};
+        try{localStorage.removeItem(STATE_KEY);localStorage.removeItem(TOKEN_KEY);}catch(e){}
+      }
       var data;
       if(token){
         state.token=token;
