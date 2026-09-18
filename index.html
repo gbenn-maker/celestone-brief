@@ -110,6 +110,21 @@
     .segment h3{font-family:"Fraunces",serif;font-size:25px;font-weight:500;margin:10px 0 8px}
     .segment p{color:#d7cfc1;font-size:14px;line-height:1.5;margin:0}
     .wa{display:block;text-decoration:none;text-align:center;background:#1f7a55;color:white;border-radius:14px;padding:15px;font-weight:800;margin-top:18px}
+    .restart{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:8px 12px;font-size:11px;font-weight:800;white-space:nowrap}
+    .final-actions{display:grid;gap:10px;margin-top:18px}
+    .action-link{display:flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;text-align:center;border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:14px;padding:14px;font-weight:800;background:rgba(255,255,255,.07)}
+    .action-link.call{background:#f4eee2;color:var(--ink);border-color:#f4eee2}
+    .action-link.wa{margin-top:0;background:#1f7a55;border-color:#1f7a55}
+    .gallery-modal{position:fixed;inset:0;z-index:80;background:rgba(23,21,18,.96);color:#fff;display:none;overflow:auto;padding:18px}
+    .gallery-modal.open{display:block}
+    .gallery-inner{max-width:980px;margin:auto;padding:18px 0 60px}
+    .gallery-head{position:sticky;top:0;z-index:2;background:rgba(23,21,18,.94);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0 16px}
+    .gallery-head h3{font-family:"Fraunces",serif;font-size:30px;font-weight:500;margin:0}
+    .gallery-close{border:1px solid #665f55;background:#2b2823;color:#fff;border-radius:999px;padding:9px 13px;font-weight:800}
+    .gallery-model{margin-top:28px}
+    .gallery-model h4{font-family:"Fraunces",serif;font-size:25px;font-weight:500;margin:0 0 10px}
+    .gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .gallery-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;background:#332f29}
     .sync{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted);margin-top:12px}
     .sync i{width:7px;height:7px;border-radius:50%;background:#9a938a}
     .sync.ok i{background:#3a8b66}
@@ -125,6 +140,7 @@
   <header class="top">
     <div class="top-in">
       <div class="brand">Deutschconfort<small>Celestone · espace projet</small></div>
+      <button class="restart" id="restartBtn" type="button">Recommencer</button>
       <div class="progress-wrap">
         <div class="progress-meta"><span id="progressLabel">Étape 1 sur 10</span><span id="dossierCode">Dossier en création</span></div>
         <div class="bar"><span id="progressBar"></span></div>
@@ -167,14 +183,14 @@
         <div class="eyebrow">02 · Mesures</div>
         <h2>Quelle surface devons-nous <span class="accent">habiller ?</span></h2>
         <p class="lead">Une estimation suffit. Si vous ne savez pas, nous pouvons organiser la prise de mesures dans la zone couverte.</p>
+        <div class="formbox" id="surfaceKnown" style="display:none;margin-top:24px">
+          <div class="field"><label>Surface approximative en m²</label><input id="surfaceM2" type="number" min="1" step="1" inputmode="decimal" placeholder="Ex. 42"></div>
+        </div>
         <div class="grid">
           <button class="choice" data-field="measurement_mode" data-value="known"><div class="icon">≈</div><b>Je connais les m²</b><span>Entrez une surface approximative.</span></button>
           <button class="choice" data-field="measurement_mode" data-value="dimensions"><div class="icon">↔</div><b>J'ai longueur × hauteur</b><span>Nous calculons automatiquement.</span></button>
           <button class="choice" data-field="measurement_mode" data-value="visit"><div class="icon">◎</div><b>Je veux une prise de mesures</b><span>Nous vérifions l'éligibilité à une visite.</span></button>
           <button class="choice" data-field="measurement_mode" data-value="unknown"><div class="icon">?</div><b>Je ne sais pas encore</b><span>On peut avancer avec une photo.</span></button>
-        </div>
-        <div class="formbox" id="surfaceKnown" style="display:none">
-          <div class="field"><label>Surface approximative en m²</label><input id="surfaceM2" type="number" min="1" step="1" placeholder="Ex. 42"></div>
         </div>
         <div class="formbox" id="surfaceDims" style="display:none">
           <div class="inline">
@@ -307,13 +323,25 @@
             <div class="segment-code" id="segmentCode">—</div>
             <h3 id="segmentTitle">Prochaine étape</h3>
             <p id="segmentText">Nous préparons la suite adaptée à votre dossier.</p>
-            <a class="wa" id="whatsappCta" href="#" target="_blank" rel="noreferrer">Continuer sur WhatsApp</a>
+            <div class="final-actions">
+              <a class="action-link call" href="tel:+212614474221">☎ Appeler maintenant</a>
+              <a class="action-link wa" id="whatsappCta" href="#" target="_blank" rel="noreferrer">WhatsApp · envoyer mon projet</a>
+              <button class="action-link" id="galleryCta" type="button">▦ Voir la galerie photos</button>
+              <a class="action-link" href="https://deutsch-confort.com/" target="_blank" rel="noreferrer">↗ Visiter le site web</a>
+            </div>
             <div class="micro" style="color:#a99f90;margin-top:10px">Aucun prix n'est affiché ici : le chiffrage vous est envoyé 1:1 après revue du dossier.</div>
           </div>
         </div>
       </div>
     </section>
   </main>
+
+  <div class="gallery-modal" id="galleryModal" aria-hidden="true">
+    <div class="gallery-inner">
+      <div class="gallery-head"><h3>Réalisations Celestone</h3><button class="gallery-close" id="galleryClose" type="button">Fermer ×</button></div>
+      <div id="galleryContent"></div>
+    </div>
+  </div>
 
   <div class="nav" id="nav">
     <div class="nav-in">
@@ -339,18 +367,27 @@
     lastSyncOk:false
   };
 
-  var ASSET_ROOT = location.pathname.indexOf('/projet')>=0 ? '../assets/models/' : 'assets/models/';
+  var SITE_ASSET_ROOT = 'https://deutsch-confort.com/';
   var MODEL_CATALOG = [
-    {id:'big-rock',name:'Big Rock',category:'Pierre & minéral',family:'pierre',size:'240×60 / 120×60 cm',image:'big-rock.webp',reason:'Relief pierre puissant, particulièrement adapté aux façades, jardins et murs signature.'},
-    {id:'travertin',name:'Travertin',category:'Pierre & minéral',family:'pierre',size:'115×75 cm',image:'travertin.webp',reason:'Lecture minérale plus régulière, élégante et lumineuse.'},
-    {id:'mattoni',name:'Mattoni',category:'Brique',family:'brique',size:'207×50 cm',image:'mattoni.webp',reason:'Brique XL contemporaine, très efficace pour rythmer les grandes surfaces.'},
-    {id:'cemento',name:'Cemento',category:'Béton architectural',family:'beton',size:'120×57 cm',image:'cemento.webp',reason:'Béton texturé polyvalent, sobre et architectural.'},
-    {id:'beton-brut',name:'Béton Brut',category:'Béton architectural',family:'beton',size:'120×80 cm',image:'beton-brut.webp',reason:'Aspect brut et minimal pour une architecture épurée.'},
-    {id:'beton-decoffrage',name:'Béton Décoffrage',category:'Béton architectural',family:'beton',size:'230×51 cm',image:'beton-decoffrage.webp',reason:'Trame de coffrage graphique, idéale sur les grands pans de mur.'},
-    {id:'cubo',name:'Cubo',category:'Reliefs 3D & graphiques',family:'graphique',size:'240×50 cm',image:'cubo.webp',reason:'Relief 3D géométrique pour un mur décoratif fort.'},
-    {id:'moon',name:'Moon',category:'Reliefs 3D & graphiques',family:'graphique',size:'118×48 cm',image:'moon.webp',reason:'Ondulation sculpturale et organique, avec beaucoup de profondeur.'},
-    {id:'bois-cubo',name:'Bois Cubo',category:'Bois & organique',family:'organique',size:'125×39,5 cm',image:'bois-cubo.webp',reason:'Relief inspiré du bois pour apporter chaleur et matière.'}
+    {id:'big-rock',name:'Big Rock',category:'Pierre & minéral',family:'pierre',size:'240×60 / 120×60 cm',image:'images/panels/big-rock-product.png',reason:'Relief pierre puissant, particulièrement adapté aux façades, jardins et murs signature.'},
+    {id:'travertin',name:'Travertin',category:'Pierre & minéral',family:'pierre',size:'115×75 cm',image:'images/panels/travertin-product.png',reason:'Lecture minérale plus régulière, élégante et lumineuse.'},
+    {id:'mattoni',name:'Mattoni',category:'Brique',family:'brique',size:'207×50 cm',image:'images/panels/mattoni-product.png',reason:'Brique XL contemporaine, très efficace pour rythmer les grandes surfaces.'},
+    {id:'cemento',name:'Cemento',category:'Béton architectural',family:'beton',size:'120×57 cm',image:'images/panels/cemento-product.png',reason:'Béton texturé polyvalent, sobre et architectural.'},
+    {id:'beton-brut',name:'Béton Brut',category:'Béton architectural',family:'beton',size:'120×80 cm',image:'images/panels/beton-brut-product.png',reason:'Aspect brut et minimal pour une architecture épurée.'},
+    {id:'beton-decoffrage',name:'Béton Décoffrage',category:'Béton architectural',family:'beton',size:'230×51 cm',image:'images/panels/beton-decoffrage-product.jpg',reason:'Trame de coffrage graphique, idéale sur les grands pans de mur.'},
+    {id:'cubo',name:'Cubo',category:'Reliefs 3D & graphiques',family:'graphique',size:'240×50 cm',image:'images/panels/cubo-product.png',reason:'Relief 3D géométrique pour un mur décoratif fort.'},
+    {id:'moon',name:'Moon',category:'Reliefs 3D & graphiques',family:'graphique',size:'118×48 cm',image:'images/panels/moon-product.png',reason:'Ondulation sculpturale et organique, avec beaucoup de profondeur.'},
+    {id:'bois-cubo',name:'Bois Cubo',category:'Bois & organique',family:'organique',size:'125×39,5 cm',image:'images/panels/bois-cubo-product.png',reason:'Relief inspiré du bois pour apporter chaleur et matière.'}
   ];
+  var GALLERY = {
+    'Big Rock':['images/realisations/big-rock-01.jpg','images/realisations/big-rock-02.jpg','images/realisations/big-rock-04.jpg','images/realisations/big-rock-06.jpg'],
+    'Béton Brut':['images/realisations/beton-brut-01.jpg','images/realisations/beton-brut-02.jpg','images/realisations/beton-brut-04.jpg'],
+    'Cemento':['images/realisations/cemento-01.jpg','images/realisations/cemento-02.jpg','images/realisations/cemento-03.jpg'],
+    'Cubo':['images/realisations/cubo-03.jpg','images/realisations/cubo-04.jpg','images/realisations/cubo-05.jpg'],
+    'Mattoni':['images/realisations/mattoni-01.jpg','images/realisations/mattoni-02.jpg','images/realisations/mattoni-03.jpg'],
+    'Moon':['images/realisations/moon-01.jpg','images/realisations/moon-02.jpg','images/realisations/moon-03.jpg'],
+    'Bois Cubo':['images/realisations/bois-cubo-01.jpg','images/realisations/bois-cubo-02.jpg']
+  };
   var MODEL_MAP = Object.fromEntries(MODEL_CATALOG.map(function(m){return [m.name,m];}));
   var CATEGORY_ORDER = ['Pierre & minéral','Brique','Béton architectural','Reliefs 3D & graphiques','Bois & organique'];
 
@@ -487,13 +524,17 @@
     el('phone').addEventListener('input',function(){state.contact.phone=this.value;queueSync();});
     el('email').addEventListener('input',function(){state.contact.email=this.value;queueSync();});
     el('photos').addEventListener('change',uploadPhotos);
+    el('restartBtn').addEventListener('click',restartBrief);
+    el('galleryCta').addEventListener('click',openGallery);
+    el('galleryClose').addEventListener('click',closeGallery);
+    el('galleryModal').addEventListener('click',function(e){if(e.target===this)closeGallery();});
     el('collectionToggle').addEventListener('click',function(){
       state.answers.collection_opened=!state.answers.collection_opened;
       renderCollection();
       queueSync();
     });
     el('backBtn').addEventListener('click',function(){go(Math.max(1,state.step-1),false);});
-    el('nextBtn').addEventListener('click',function(){ if(state.step===9)return; if(validate(state.step))go(Math.min(9,state.step+1),true); });
+    el('nextBtn').addEventListener('click',function(){ if(state.step===10)return; if(validate(state.step))go(Math.min(10,state.step+1),true); });
     el('whatsappCta').addEventListener('click',function(e){ e.preventDefault(); completeAndWhatsapp(); });
   }
 
@@ -588,7 +629,7 @@
     var card=document.createElement('div');
     var selected=selectedModels().indexOf(m.name)>=0;
     card.className='rec'+(selected?' selected':'');
-    card.innerHTML='<div class="model-photo"><img src="'+ASSET_ROOT+esc(m.image)+'" alt="'+esc(m.name)+'" loading="lazy">'+(selected?'<span class="selected-pill">✓ Sélectionné</span>':'')+'</div><div class="body"><div class="rec-meta"><span>'+esc(m.category)+'</span><span>'+esc(m.size)+'</span></div><b>'+esc(m.name)+'</b><p>'+esc(m.reason)+'</p></div>';
+    card.innerHTML='<div class="model-photo"><img src="'+SITE_ASSET_ROOT+esc(m.image)+'" alt="'+esc(m.name)+'" loading="lazy">'+(selected?'<span class="selected-pill">✓ Sélectionné</span>':'')+'</div><div class="body"><div class="rec-meta"><span>'+esc(m.category)+'</span><span>'+esc(m.size)+'</span></div><b>'+esc(m.name)+'</b><p>'+esc(m.reason)+'</p></div>';
     card.addEventListener('click',function(){toggleModel(m.name);});
     return card;
   }
@@ -723,9 +764,31 @@
   }
 
   function localWa(){
-    var msg='Bonjour, je viens de compléter mon dossier Celestone '+(state.code||'')+'.';
-    if(!state.lastSyncOk)msg+='\n'+recap();
+    var msg='Bonjour, je viens de compléter mon dossier Celestone '+(state.code||'')+'.\n\n'+recap();
     return 'https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg);
+  }
+
+  function restartBrief(){
+    if(!confirm('Recommencer avec un nouveau dossier ?'))return;
+    try{localStorage.removeItem(STATE_KEY);localStorage.removeItem(TOKEN_KEY);}catch(e){}
+    var u=new URL(location.href); u.searchParams.delete('d'); u.searchParams.set('new',Date.now().toString(36));
+    location.href=u.toString();
+  }
+
+  function openGallery(){
+    var root=el('galleryContent'); root.innerHTML='';
+    var preferred=selectedModels();
+    var order=preferred.concat(Object.keys(GALLERY).filter(function(n){return preferred.indexOf(n)<0;}));
+    order.forEach(function(name){
+      var photos=GALLERY[name]; if(!photos||!photos.length)return;
+      var block=document.createElement('section'); block.className='gallery-model';
+      block.innerHTML='<h4>'+esc(name)+'</h4><div class="gallery-grid">'+photos.map(function(src){return '<img src="'+SITE_ASSET_ROOT+esc(src)+'" alt="Réalisation '+esc(name)+'" loading="lazy">';}).join('')+'</div>';
+      root.appendChild(block);
+    });
+    el('galleryModal').classList.add('open'); el('galleryModal').setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+  }
+  function closeGallery(){
+    el('galleryModal').classList.remove('open'); el('galleryModal').setAttribute('aria-hidden','true'); document.body.style.overflow='';
   }
 
   async function completeAndWhatsapp(){
