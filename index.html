@@ -70,15 +70,34 @@
     .upload .big{font-family:"Fraunces",serif;font-size:23px;color:var(--ink);display:block;margin-bottom:6px}
     .photo-state{margin-top:14px;font-size:13px;color:var(--ok);font-weight:700}
     .recs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
-    .rec{border:1px solid var(--line);background:var(--card);border-radius:18px;overflow:hidden;cursor:pointer;transition:.18s}
-    .rec.selected{outline:2px solid var(--clay)}
-    .swatch{height:122px;background:linear-gradient(135deg,#ddd0bb,#bda98c);position:relative;overflow:hidden}
-    .swatch:before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.6) 0 7%,transparent 8%),radial-gradient(circle at 70% 60%,rgba(0,0,0,.08) 0 9%,transparent 10%);transform:rotate(-7deg)}
-    .rec:nth-child(2) .swatch{background:repeating-linear-gradient(0deg,#ded2bb 0 24px,#c0b093 24px 27px)}
-    .rec:nth-child(3) .swatch{background:repeating-linear-gradient(45deg,#ded2bb 0 18px,#c8b89d 18px 36px)}
-    .rec .body{padding:16px}
-    .rec b{font-family:"Fraunces",serif;font-size:22px;font-weight:500}
-    .rec p{font-size:13px;color:var(--muted);line-height:1.45;margin:7px 0 0}
+    .rec{border:1px solid var(--line);background:var(--card);border-radius:18px;overflow:hidden;cursor:pointer;transition:.18s;position:relative}
+    .rec:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(43,36,27,.1)}
+    .rec.selected{outline:2px solid var(--clay);background:#fff8f2}
+    .model-photo{height:150px;background:#e8dfd0;position:relative;overflow:hidden}
+    .model-photo img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .25s ease}
+    .rec:hover .model-photo img{transform:scale(1.025)}
+    .selected-pill{position:absolute;right:10px;top:10px;background:var(--clay);color:white;border-radius:999px;padding:6px 9px;font-size:10px;font-weight:800;letter-spacing:.03em}
+    .rec .body{padding:15px}
+    .rec b{font-family:"Fraunces",serif;font-size:21px;font-weight:500}
+    .rec p{font-size:12px;color:var(--muted);line-height:1.45;margin:6px 0 0}
+    .rec-meta{display:flex;justify-content:space-between;gap:8px;margin-bottom:7px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--bronze)}
+    .selection-note{margin-top:14px;padding:11px 13px;border-radius:12px;background:#eee5d7;color:var(--muted);font-size:12px}
+    .collection-toggle{margin-top:16px;width:100%;border:1px solid var(--bronze);background:transparent;color:var(--ink);border-radius:13px;padding:13px 16px;font-weight:800}
+    .collection{display:none;margin-top:20px}
+    .collection.open{display:block}
+    .category-block{margin-top:24px}
+    .category-block:first-child{margin-top:0}
+    .category-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+    .category-title b{font-family:"Fraunces",serif;font-size:23px;font-weight:500}
+    .category-title span{font-size:11px;color:var(--muted)}
+    .reassure-box{margin-top:26px;border:1px solid var(--line);background:var(--card);border-radius:20px;padding:22px}
+    .reassure-box h3{font-family:"Fraunces",serif;font-size:27px;font-weight:500;margin:0 0 10px}
+    .reassure-box>p{color:var(--muted);line-height:1.6;margin:0}
+    .proof-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+    .proof{border:1px solid #e6dccb;background:#fffaf2;border-radius:14px;padding:14px}
+    .proof b{display:block;font-size:13px;margin-bottom:5px}
+    .proof span{font-size:12px;line-height:1.5;color:var(--muted)}
+    .truth-note{margin-top:14px;padding:11px 13px;border-left:3px solid var(--bronze);background:#f7f1e7;color:var(--muted);font-size:11px;line-height:1.5}
     .summary{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin-top:28px}
     .panel{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:20px}
     .rows{display:grid;gap:0}
@@ -97,7 +116,7 @@
     .foot{max-width:980px;width:100%;margin:auto;padding:0 18px 22px;font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:12px}
     .hp{position:absolute!important;left:-9999px!important}
     @media(max-width:720px){
-      .top-in{padding:12px 14px}.brand small{display:none}.main{padding:22px 14px 110px}.grid,.recs,.summary,.inline{grid-template-columns:1fr}.choice{min-height:auto}.hero-card{grid-template-columns:1fr;padding:8px}.hero-card div{padding:10px}.stage{min-height:calc(100vh - 170px)}.nav{padding-left:14px;padding-right:14px}.nav-in{justify-content:space-between}.nav-in .btn{flex:1}.progress-wrap{width:42vw}.rec{display:grid;grid-template-columns:110px 1fr}.swatch{height:100%;min-height:120px}
+      .top-in{padding:12px 14px}.brand small{display:none}.main{padding:22px 14px 110px}.grid,.recs,.summary,.inline,.proof-grid{grid-template-columns:1fr}.choice{min-height:auto}.hero-card{grid-template-columns:1fr;padding:8px}.hero-card div{padding:10px}.stage{min-height:calc(100vh - 170px)}.nav{padding-left:14px;padding-right:14px}.nav-in{justify-content:space-between}.nav-in .btn{flex:1}.progress-wrap{width:42vw}.rec{display:grid;grid-template-columns:118px 1fr}.model-photo{height:100%;min-height:128px}
     }
   </style>
 </head>
@@ -107,7 +126,7 @@
     <div class="top-in">
       <div class="brand">Deutschconfort<small>Celestone · espace projet</small></div>
       <div class="progress-wrap">
-        <div class="progress-meta"><span id="progressLabel">Étape 1 sur 9</span><span id="dossierCode">Dossier en création</span></div>
+        <div class="progress-meta"><span id="progressLabel">Étape 1 sur 10</span><span id="dossierCode">Dossier en création</span></div>
         <div class="bar"><span id="progressBar"></span></div>
       </div>
     </div>
@@ -120,7 +139,7 @@
         <h1>On transforme votre mur en <span class="accent">projet clair.</span></h1>
         <p class="lead">Répondez à quelques questions. Nous préparons votre dossier Celestone, recommandons 2–3 modèles adaptés et revenons vers vous sur WhatsApp avec la prochaine étape.</p>
         <div class="hero-card">
-          <div><b>9 étapes</b><span>courtes et mobiles</span></div>
+          <div><b>10 étapes</b><span>courtes et mobiles</span></div>
           <div><b>2–3 modèles</b><span>adaptés à votre contexte</span></div>
           <div><b>1 dossier</b><span>qui suit votre projet dans notre CRM</span></div>
         </div>
@@ -220,17 +239,45 @@
 
     <section class="screen" data-screen="7">
       <div class="stage">
-        <div class="eyebrow">06 · Recommandation</div>
-        <h2>Trois pistes à regarder <span class="accent">en priorité.</span></h2>
-        <p class="lead">Nous les avons filtrées selon l'usage et le style que vous avez indiqués. Vous pourrez toujours changer ensuite.</p>
+        <div class="eyebrow">06 · Choix des revêtements</div>
+        <h2>Quels modèles voyez-vous sur <span class="accent">votre projet ?</span></h2>
+        <p class="lead">Nous vous proposons d’abord trois pistes cohérentes avec vos réponses. Vous pouvez en sélectionner <strong>une ou plusieurs</strong>, puis ouvrir toute la collection si vous voulez comparer davantage.</p>
         <div class="recs" id="recommendations"></div>
-        <div class="micro" style="margin-top:14px">Cliquez sur votre favori si l'un d'eux vous parle déjà.</div>
+        <div class="selection-note" id="selectedModelsNote">Sélectionnez au moins un modèle pour continuer.</div>
+        <button class="collection-toggle" id="collectionToggle" type="button">Voir toute la collection ↓</button>
+        <div class="collection" id="fullCollection"></div>
+        <div class="error" data-error="7">Sélectionnez au moins un revêtement. Vous pouvez ouvrir toute la collection si les trois propositions ne vous correspondent pas.</div>
       </div>
     </section>
 
     <section class="screen" data-screen="8">
       <div class="stage">
-        <div class="eyebrow">07 · Contact</div>
+        <div class="eyebrow">07 · Vos doutes produit</div>
+        <h2>Souhaiteriez-vous éclaircir vos doutes <span class="accent">avant d’aller plus loin ?</span></h2>
+        <p class="lead">Composition du matériau, résistance et tenue dans le temps, humidité et extérieur, efficacité de la pose, finition… Nous pouvons vous donner l’essentiel tout de suite.</p>
+        <div class="grid">
+          <button class="choice" data-field="reassurance_requested" data-value="yes"><div class="icon">✓</div><b>Oui, je veux être rassuré</b><span>Montrez-moi les points techniques essentiels.</span></button>
+          <button class="choice" data-field="reassurance_requested" data-value="no"><div class="icon">→</div><b>Non, c’est clair pour moi</b><span>Je peux continuer directement.</span></button>
+        </div>
+        <div class="reassure-box" id="reassurancePanel" style="display:none">
+          <div class="eyebrow">L’essentiel sur Celestone</div>
+          <h3>Un relief architectural fort, sans les contraintes d’un parement lourd.</h3>
+          <p>Celestone est un revêtement en <strong>polyuréthane rigide haute densité à cœur massif</strong>. Cette construction permet d’obtenir des panneaux légers, rigides et résistants aux chocs, tout en conservant un relief marqué. Le matériau est hydrophobe et conçu pour résister à l’eau et à l’humidité ; pour l’usage extérieur, la formulation intègre des additifs anti-UV. Les panneaux sont destinés à l’intérieur comme à l’extérieur lorsque le support et la mise en œuvre sont adaptés.</p>
+          <div class="proof-grid">
+            <div class="proof"><b>Composition & solidité</b><span>PU rigide haute densité à cœur massif : structure légère, rigide et conçue pour bien encaisser les chocs du quotidien.</span></div>
+            <div class="proof"><b>Humidité & extérieur</b><span>Matériau hydrophobe, résistant à l’humidité, avec protection anti-UV prévue pour les applications extérieures.</span></div>
+            <div class="proof"><b>Pose plus simple</b><span>Le faible poids facilite la manutention, notamment en hauteur. La mise en œuvre se fait par collage et vissage sur un support correctement préparé.</span></div>
+            <div class="proof"><b>Finition maîtrisée</b><span>Les panneaux sont fournis avec un primaire prêt à peindre. Une peinture acrylique à l’eau est recommandée pour une bonne adhérence et une finition durable.</span></div>
+          </div>
+          <div class="truth-note"><strong>À retenir :</strong> la tenue finale d’un revêtement dépend aussi de la qualité du support, de sa préparation, de la pose, de la finition et de l’exposition du chantier. Notre équipe vérifie ces points avant de vous orienter.</div>
+        </div>
+        <div class="error" data-error="8">Choisissez simplement Oui ou Non pour continuer.</div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="9">
+      <div class="stage">
+        <div class="eyebrow">08 · Contact</div>
         <h2>À qui doit-on envoyer la <span class="accent">suite ?</span></h2>
         <p class="lead">Nous utilisons ces informations uniquement pour reprendre votre dossier et vous répondre sur votre projet.</p>
         <div class="formbox">
@@ -240,13 +287,13 @@
           <input class="hp" id="website" type="text" tabindex="-1" autocomplete="off">
           <div class="micro">En continuant, vous acceptez d'être recontacté au sujet de ce projet Celestone.</div>
         </div>
-        <div class="error" data-error="8">Indiquez au minimum votre nom et votre numéro WhatsApp.</div>
+        <div class="error" data-error="9">Indiquez au minimum votre nom et votre numéro WhatsApp.</div>
       </div>
     </section>
 
-    <section class="screen" data-screen="9">
+    <section class="screen" data-screen="10">
       <div class="stage">
-        <div class="eyebrow">08 · Dossier prêt</div>
+        <div class="eyebrow">09 · Dossier prêt</div>
         <h2>Votre projet est maintenant <span class="accent">structuré.</span></h2>
         <p class="lead">Le dossier est transmis à Deutschconfort. La prochaine étape dépend des informations que vous avez déjà fournies.</p>
         <div class="summary">
@@ -287,10 +334,25 @@
 
   var state = {
     token:null, code:null, step:1, photo_count:0, recommendations:[],
-    answers:{ project_type:'', measurement_mode:'', surface_m2:null, wall_length:null, wall_height:null, style_family:'', city:'', timeframe:'', selected_model:'' },
+    answers:{ project_type:'', measurement_mode:'', surface_m2:null, wall_length:null, wall_height:null, style_family:'', city:'', timeframe:'', selected_model:'', selected_models:[], collection_opened:false, reassurance_requested:'' },
     contact:{ full_name:'', phone:'', email:'' },
     lastSyncOk:false
   };
+
+  var ASSET_ROOT = location.pathname.indexOf('/projet')>=0 ? '../assets/models/' : 'assets/models/';
+  var MODEL_CATALOG = [
+    {id:'big-rock',name:'Big Rock',category:'Pierre & minéral',family:'pierre',size:'240×60 / 120×60 cm',image:'big-rock.webp',reason:'Relief pierre puissant, particulièrement adapté aux façades, jardins et murs signature.'},
+    {id:'travertin',name:'Travertin',category:'Pierre & minéral',family:'pierre',size:'115×75 cm',image:'travertin.webp',reason:'Lecture minérale plus régulière, élégante et lumineuse.'},
+    {id:'mattoni',name:'Mattoni',category:'Brique',family:'brique',size:'207×50 cm',image:'mattoni.webp',reason:'Brique XL contemporaine, très efficace pour rythmer les grandes surfaces.'},
+    {id:'cemento',name:'Cemento',category:'Béton architectural',family:'beton',size:'120×57 cm',image:'cemento.webp',reason:'Béton texturé polyvalent, sobre et architectural.'},
+    {id:'beton-brut',name:'Béton Brut',category:'Béton architectural',family:'beton',size:'120×80 cm',image:'beton-brut.webp',reason:'Aspect brut et minimal pour une architecture épurée.'},
+    {id:'beton-decoffrage',name:'Béton Décoffrage',category:'Béton architectural',family:'beton',size:'230×51 cm',image:'beton-decoffrage.webp',reason:'Trame de coffrage graphique, idéale sur les grands pans de mur.'},
+    {id:'cubo',name:'Cubo',category:'Reliefs 3D & graphiques',family:'graphique',size:'240×50 cm',image:'cubo.webp',reason:'Relief 3D géométrique pour un mur décoratif fort.'},
+    {id:'moon',name:'Moon',category:'Reliefs 3D & graphiques',family:'graphique',size:'118×48 cm',image:'moon.webp',reason:'Ondulation sculpturale et organique, avec beaucoup de profondeur.'},
+    {id:'bois-cubo',name:'Bois Cubo',category:'Bois & organique',family:'organique',size:'125×39,5 cm',image:'bois-cubo.webp',reason:'Relief inspiré du bois pour apporter chaleur et matière.'}
+  ];
+  var MODEL_MAP = Object.fromEntries(MODEL_CATALOG.map(function(m){return [m.name,m];}));
+  var CATEGORY_ORDER = ['Pierre & minéral','Brique','Béton architectural','Reliefs 3D & graphiques','Bois & organique'];
 
   function el(id){ return document.getElementById(id); }
   function localSave(){ try{ localStorage.setItem(STATE_KEY, JSON.stringify(state)); if(state.token)localStorage.setItem(TOKEN_KEY,state.token); }catch(e){} }
@@ -300,10 +362,12 @@
     if(!d)return;
     state.token = d.public_token || state.token;
     state.code = d.code || state.code;
-    state.step = Math.max(1, Math.min(9, Number(d.current_step || state.step || 1)));
+    state.step = Math.max(1, Math.min(10, Number(d.current_step || state.step || 1)));
     state.photo_count = Number(d.photo_count || 0);
     state.recommendations = d.recommendations || [];
     state.answers = Object.assign({}, state.answers, d.answers || {});
+    if(!Array.isArray(state.answers.selected_models))state.answers.selected_models=[];
+    if(!state.answers.selected_models.length&&state.answers.selected_model)state.answers.selected_models=[state.answers.selected_model];
     if(d.project_type)state.answers.project_type=d.project_type;
     if(d.surface_m2)state.answers.surface_m2=d.surface_m2;
     if(d.style_family)state.answers.style_family=d.style_family;
@@ -422,6 +486,11 @@
     el('phone').addEventListener('input',function(){state.contact.phone=this.value;queueSync();});
     el('email').addEventListener('input',function(){state.contact.email=this.value;queueSync();});
     el('photos').addEventListener('change',uploadPhotos);
+    el('collectionToggle').addEventListener('click',function(){
+      state.answers.collection_opened=!state.answers.collection_opened;
+      renderCollection();
+      queueSync();
+    });
     el('backBtn').addEventListener('click',function(){go(Math.max(1,state.step-1),false);});
     el('nextBtn').addEventListener('click',function(){ if(state.step===9)return; if(validate(state.step))go(Math.min(9,state.step+1),true); });
     el('whatsappCta').addEventListener('click',function(e){ e.preventDefault(); completeAndWhatsapp(); });
@@ -451,7 +520,9 @@
     }
     if(step===4)ok=!!state.answers.style_family;
     if(step===5)ok=!!String(state.answers.city||'').trim()&&!!state.answers.timeframe;
-    if(step===8)ok=!!String(state.contact.full_name||'').trim()&&String(state.contact.phone||'').replace(/\D/g,'').length>=8;
+    if(step===7)ok=Array.isArray(state.answers.selected_models)&&state.answers.selected_models.length>0;
+    if(step===8)ok=state.answers.reassurance_requested==='yes'||state.answers.reassurance_requested==='no';
+    if(step===9)ok=!!String(state.contact.full_name||'').trim()&&String(state.contact.phone||'').replace(/\D/g,'').length>=8;
     var box=document.querySelector('[data-error="'+step+'"]');
     if(box)box.classList.toggle('show',!ok);
     return ok;
@@ -463,17 +534,17 @@
     render();
     window.scrollTo({top:0,behavior:'smooth'});
     if(forward)await sync();
-    if(step===9){ await sync({completed:true}); renderSummary(); }
+    if(step===10){ await sync({completed:true}); renderSummary(); }
   }
 
   function render(){
     document.querySelectorAll('.screen').forEach(function(s){s.classList.toggle('active',Number(s.getAttribute('data-screen'))===state.step);});
-    el('progressLabel').textContent='Étape '+state.step+' sur 9';
-    el('progressBar').style.width=(state.step/9*100)+'%';
+    el('progressLabel').textContent='Étape '+state.step+' sur 10';
+    el('progressBar').style.width=(state.step/10*100)+'%';
     el('dossierCode').textContent=state.code||'Dossier en création';
     el('backBtn').style.visibility=state.step===1?'hidden':'visible';
-    el('nextBtn').style.display=state.step===9?'none':'inline-block';
-    el('nextBtn').textContent=state.step===1?'Commencer':(state.step===8?'Voir mon dossier':'Continuer');
+    el('nextBtn').style.display=state.step===10?'none':'inline-block';
+    el('nextBtn').textContent=state.step===1?'Commencer':(state.step===9?'Voir mon dossier':'Continuer');
     renderChoices();
     toggleSurfaceFields();
     el('surfaceM2').value=state.answers.surface_m2||'';
@@ -484,8 +555,9 @@
     el('phone').value=state.contact.phone||'';
     el('email').value=state.contact.email||'';
     el('photoState').textContent=state.photo_count?state.photo_count+' photo(s) ajoutée(s) au dossier':'Aucune photo ajoutée';
-    if(state.step===7)renderRecommendations();
-    if(state.step===9)renderSummary();
+    if(state.step===7){renderRecommendations();renderCollection();}
+    if(state.step===8)renderReassurance();
+    if(state.step===10)renderSummary();
     localSave();
   }
 
@@ -497,46 +569,72 @@
 
   function recommend(){
     var style=state.answers.style_family;
-    var map={
-      pierre:[
-        {name:'Big Rock',reason:'Relief pierre marqué, très fort en façade, jardin et murs signature.'},
-        {name:'Cemento',reason:'Alternative minérale plus calme pour garder un rendu architectural.'},
-        {name:'Béton Brut',reason:'Texture minérale sobre si vous voulez moins de relief.'}
-      ],
-      brique:[
-        {name:'Mattoni',reason:'Brique XL contemporaine, très efficace sur de grandes surfaces.'},
-        {name:'Brick',reason:'Format plus fin pour un rythme plus détaillé.'},
-        {name:'Béton Décoffrage',reason:'Alternative structurée pour sortir de la brique classique.'}
-      ],
-      beton:[
-        {name:'Cemento',reason:'Béton texturé et polyvalent intérieur / extérieur.'},
-        {name:'Béton Brut',reason:'Aspect brut et minimal pour une architecture épurée.'},
-        {name:'Béton Décoffrage',reason:'Trame plus graphique, idéale pour les grands pans de mur.'}
-      ],
-      graphique:[
-        {name:'Cubo',reason:'Relief 3D très lisible pour un mur décoratif fort.'},
-        {name:'Moon 1',reason:'Ondulation profonde, très sculpturale.'},
-        {name:'Moon 2',reason:'Version plus compacte pour une composition plus douce.'}
-      ]
-    };
-    return (map[style]||[
-      {name:'Big Rock',reason:'Une valeur minérale forte, particulièrement convaincante en extérieur.'},
-      {name:'Mattoni',reason:'Une option contemporaine et structurée, facile à projeter.'},
-      {name:'Cubo',reason:'Une piste graphique si vous cherchez un effet décoratif marqué.'}
-    ]).slice(0,3);
+    var ids={
+      pierre:['big-rock','travertin','cemento'],
+      brique:['mattoni','beton-decoffrage','cemento'],
+      beton:['cemento','beton-brut','beton-decoffrage'],
+      graphique:['cubo','moon','bois-cubo'],
+      surprise:['big-rock','mattoni','cubo']
+    }[style]||['big-rock','mattoni','cubo'];
+    return ids.map(function(id){return MODEL_CATALOG.find(function(m){return m.id===id;});}).filter(Boolean);
+  }
+
+  function selectedModels(){
+    return Array.isArray(state.answers.selected_models)?state.answers.selected_models:[];
+  }
+
+  function modelCard(m){
+    var card=document.createElement('div');
+    var selected=selectedModels().indexOf(m.name)>=0;
+    card.className='rec'+(selected?' selected':'');
+    card.innerHTML='<div class="model-photo"><img src="'+ASSET_ROOT+esc(m.image)+'" alt="'+esc(m.name)+'" loading="lazy">'+(selected?'<span class="selected-pill">✓ Sélectionné</span>':'')+'</div><div class="body"><div class="rec-meta"><span>'+esc(m.category)+'</span><span>'+esc(m.size)+'</span></div><b>'+esc(m.name)+'</b><p>'+esc(m.reason)+'</p></div>';
+    card.addEventListener('click',function(){toggleModel(m.name);});
+    return card;
+  }
+
+  function toggleModel(name){
+    var arr=selectedModels().slice();
+    var i=arr.indexOf(name);
+    if(i>=0)arr.splice(i,1);else arr.push(name);
+    state.answers.selected_models=arr;
+    state.answers.selected_model=arr[0]||'';
+    renderRecommendations();
+    renderCollection();
+    queueSync();
   }
 
   function renderRecommendations(){
     var list=state.recommendations&&state.recommendations.length?state.recommendations:recommend();
     state.recommendations=list;
-    el('recommendations').innerHTML='';
-    list.forEach(function(r){
-      var card=document.createElement('div');
-      card.className='rec'+(state.answers.selected_model===r.name?' selected':'');
-      card.innerHTML='<div class="swatch"></div><div class="body"><b>'+esc(r.name)+'</b><p>'+esc(r.reason)+'</p></div>';
-      card.addEventListener('click',function(){state.answers.selected_model=r.name;renderRecommendations();queueSync();});
-      el('recommendations').appendChild(card);
+    var root=el('recommendations'); root.innerHTML='';
+    list.forEach(function(m){root.appendChild(modelCard(m));});
+    var arr=selectedModels();
+    el('selectedModelsNote').innerHTML=arr.length
+      ? '<strong>'+arr.length+' modèle'+(arr.length>1?'s':'')+' sélectionné'+(arr.length>1?'s':'')+' :</strong> '+arr.map(esc).join(' · ')
+      : 'Sélectionnez au moins un modèle pour continuer.';
+  }
+
+  function renderCollection(){
+    var root=el('fullCollection');
+    var open=!!state.answers.collection_opened;
+    root.classList.toggle('open',open);
+    el('collectionToggle').textContent=open?'Réduire la collection ↑':'Voir toute la collection ↓';
+    if(!open){root.innerHTML='';return;}
+    root.innerHTML='';
+    CATEGORY_ORDER.forEach(function(cat){
+      var models=MODEL_CATALOG.filter(function(m){return m.category===cat;});
+      var block=document.createElement('div'); block.className='category-block';
+      var title=document.createElement('div'); title.className='category-title';
+      title.innerHTML='<b>'+esc(cat)+'</b><span>'+models.length+' modèle'+(models.length>1?'s':'')+'</span>';
+      var grid=document.createElement('div'); grid.className='recs'; grid.style.marginTop='0';
+      models.forEach(function(m){grid.appendChild(modelCard(m));});
+      block.appendChild(title); block.appendChild(grid); root.appendChild(block);
     });
+  }
+
+  function renderReassurance(){
+    var yes=state.answers.reassurance_requested==='yes';
+    el('reassurancePanel').style.display=yes?'block':'none';
   }
 
   async function compress(file){
@@ -594,7 +692,8 @@
       ['Ville',state.answers.city||'—'],
       ['Surface',state.answers.surface_m2?'~'+state.answers.surface_m2+' m²':'À mesurer'],
       ['Style',styleLabel(state.answers.style_family)],
-      ['Préférence',state.answers.selected_model||'À décider'],
+      ['Modèles',selectedModels().length?selectedModels().join(', '):'À décider'],
+      ['Doutes produit',state.answers.reassurance_requested==='yes'?'Éclaircis dans le brief':'Pas de précision demandée'],
       ['Échéance',state.answers.timeframe||'—'],
       ['Photos',state.photo_count?state.photo_count+' photo(s)':'Aucune']
     ];
@@ -613,7 +712,7 @@
       'Ville: '+(state.answers.city||'non précisée'),
       'Surface: '+(state.answers.surface_m2?'~'+state.answers.surface_m2+' m²':'à mesurer'),
       'Style: '+styleLabel(state.answers.style_family),
-      state.answers.selected_model?'Préférence: '+state.answers.selected_model:null,
+      selectedModels().length?'Modèles: '+selectedModels().join(', '):null,
       'Échéance: '+(state.answers.timeframe||'non précisée'),
       'Photos: '+state.photo_count
     ].filter(Boolean);
